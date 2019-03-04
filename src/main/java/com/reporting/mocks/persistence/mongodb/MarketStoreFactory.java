@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
-@Scope
 public class MarketStoreFactory implements IPersistenceStoreFactory<IMarketStore> {
     @Autowired
     protected MarketEnvRepository marketEnvRepository;

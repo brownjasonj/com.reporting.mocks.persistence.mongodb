@@ -4,13 +4,12 @@ import com.reporting.mocks.interfaces.persistence.ICalculationContextStore;
 import com.reporting.mocks.interfaces.persistence.IPersistenceStoreFactory;
 import com.reporting.mocks.model.PricingGroup;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-@Component
-@Scope
+@Service
 public class CalculationContextStoreFactory implements IPersistenceStoreFactory<ICalculationContextStore> {
     @Autowired
     protected CalculationContextRepository calculationContextRepository;
