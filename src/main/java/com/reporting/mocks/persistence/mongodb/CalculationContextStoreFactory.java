@@ -4,7 +4,6 @@ import com.reporting.mocks.interfaces.persistence.ICalculationContextStore;
 import com.reporting.mocks.interfaces.persistence.IPersistenceStoreFactory;
 import com.reporting.mocks.model.PricingGroup;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ConcurrentHashMap;

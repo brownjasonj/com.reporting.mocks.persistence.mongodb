@@ -4,6 +4,8 @@ import com.reporting.mocks.interfaces.persistence.IRiskResultStore;
 import com.reporting.mocks.model.RiskResult;
 import com.reporting.mocks.model.id.RiskRunId;
 import com.reporting.mocks.model.id.TradePopulationId;
+import com.reporting.mocks.model.risks.Risk;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -17,22 +19,22 @@ public class MongoRiskResultStore implements IRiskResultStore {
     RiskResultRepository riskResultRepository;
 
     @Override
-    public List<RiskResult> getAll() {
+    public List<RiskResult<? extends Risk>> getAll() {
         return this.riskResultRepository.findAll();
     }
 
     @Override
-    public List<RiskResult> getAllByRiskRunId(RiskRunId riskRunId) {
+    public List<RiskResult<? extends Risk>> getAllByRiskRunId(RiskRunId riskRunId) {
         return this.riskResultRepository.getAllByRiskRunId(riskRunId);
     }
 
     @Override
-    public List<RiskResult> getAllByTradePopulationId(TradePopulationId tradePopulationId) {
+    public List<RiskResult<? extends Risk>> getAllByTradePopulationId(TradePopulationId tradePopulationId) {
         return this.riskResultRepository.getAllByTradePopulationId(tradePopulationId);
     }
 
     @Override
-    public RiskResult add(RiskResult riskResult) {
+    public RiskResult<? extends Risk> add(RiskResult<? extends Risk> riskResult) {
         return this.riskResultRepository.save(riskResult);
     }
 }
