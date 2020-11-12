@@ -12,19 +12,19 @@ import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 @Configuration
 public class MongoConfig {
 
-  @Autowired
-  private MongoDbFactory mongoFactory;
-
-  @Autowired
-  private MongoMappingContext mongoMappingContext;
-
-  @Bean
-  public MappingMongoConverter mongoConverter() throws Exception {
-    DbRefResolver dbRefResolver = new DefaultDbRefResolver(mongoFactory);
-    MappingMongoConverter mongoConverter = new MappingMongoConverter(dbRefResolver, mongoMappingContext);
-    //this is my customization
-    mongoConverter.setMapKeyDotReplacement("_");
-    // mongoConverter.afterPropertiesSet();
-    return mongoConverter;
-  }
+//  @Autowired
+//  private MongoDbFactory mongoFactory;
+//
+//  @Autowired
+//  private MongoMappingContext mongoMappingContext;
+//
+//  @Bean
+//  public MappingMongoConverter mongoConverter() throws Exception {
+//    DbRefResolver dbRefResolver = new DefaultDbRefResolver(mongoFactory);
+//    MappingMongoConverter mongoConverter = new MappingMongoConverter(dbRefResolver, mongoMappingContext);
+//    //this is my customization
+//    mongoConverter.setMapKeyDotReplacement("_");
+//    // mongoConverter.afterPropertiesSet();
+//    return mongoConverter;
+//  }
 }

@@ -6,6 +6,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.UUID;
 
-public interface TradeRepository extends MongoRepository<Trade, UUID> {
+public interface TradeRepository extends MongoRepository<Trade, Tcn> {
     Trade getTradeByTcn(Tcn tcn);
 }
