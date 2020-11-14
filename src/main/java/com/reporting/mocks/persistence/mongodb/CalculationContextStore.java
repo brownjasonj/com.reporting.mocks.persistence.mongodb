@@ -11,12 +11,14 @@ import java.util.UUID;
 public class CalculationContextStore implements ICalculationContextStore {
     protected PricingGroup pricingGroup;
     protected CalculationContextRepository calculationContextRepository;
-    protected CalculationContext currentCalculationContext;
+    protected CalculationContextId currentCalculationContextId;
+    protected CalculationContextId previousCaclulationContextId;
 
     public CalculationContextStore(PricingGroup pricingGroup, CalculationContextRepository calculationContextRepository) {
         this.pricingGroup = pricingGroup;
         this.calculationContextRepository = calculationContextRepository;
-        this.currentCalculationContext = null;
+        this.currentCalculationContextId = null;
+        this.previousCaclulationContextId = null;
     }
 
     @Override
@@ -31,13 +33,30 @@ public class CalculationContextStore implements ICalculationContextStore {
 
     @Override
     public CalculationContext setCurrentContext(CalculationContext cc) {
-        this.currentCalculationContext = cc;
+        if (this.currentCalculationContextId == null) {
+            this.previousCaclulationContextId = cc.getCalculationContextId();
+        }
+        else {
+            this.previousCaclulationContextId = this.currentCalculationContextId;
+        }
+        this.currentCalculationContextId = cc.getCalculationContextId();
         return this.calculationContextRepository.save(cc);
     }
 
     @Override
     public CalculationContext getCurrentContext() {
-        return this.currentCalculationContext;
+        if (this.currentCalculationContextId == null)
+            return null;
+        else
+            return this.get(this.currentCalculationContextId.getId());
+    }
+
+    @Override
+    public CalculationContext getPreviousContext() {
+        if (this.previousCaclulationContextId == null)
+            return null;
+        else
+            return this.get(this.previousCaclulationContextId.getId());
     }
 
     @Override
