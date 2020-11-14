@@ -71,8 +71,6 @@ public class MongoTradeStore implements ITradeStore {
         return trade;
     }
 
-
-
     @Override
     public TradePopulationMutable create(DataMarkerType type) {
         TradePopulationMutable tpm = new TradePopulationMutable(this.currentTradePopulation, type);
@@ -81,8 +79,13 @@ public class MongoTradeStore implements ITradeStore {
     }
 
     @Override
-    public TradePopulation getTradePopulation(TradePopulationId id) {
+    public TradePopulation getTradePopulationById(TradePopulationId id) {
         return this.tradePopulationRepository.getTradePopulationByTradePopulationId(id);
+    }
+
+    @Override
+    public TradePopulation getCurrentTradePopulation() {
+        return currentTradePopulation;
     }
 
     @Override

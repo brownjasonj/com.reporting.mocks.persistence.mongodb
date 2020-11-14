@@ -41,6 +41,11 @@ public class CalculationContextStore implements ICalculationContextStore {
     }
 
     @Override
+    public CalculationContext getCalculationContextById(CalculationContextId calculationContextId) {
+        return this.calculationContextRepository.findCalculationContextByCalculationContextId(calculationContextId);
+    }
+
+    @Override
     public CalculationContext get(UUID id) {
         return this.calculationContextRepository.findCalculationContextByCalculationContextId(new CalculationContextId(this.pricingGroup.getName(), id));
     }

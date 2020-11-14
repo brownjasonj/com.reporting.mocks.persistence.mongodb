@@ -29,11 +29,6 @@ public class MongoRiskResultStore implements IRiskResultStore {
     }
 
     @Override
-    public List<RiskResult<? extends Risk>> getAllByTradePopulationId(TradePopulationId tradePopulationId) {
-        return this.riskResultRepository.getAllByTradePopulationId(tradePopulationId);
-    }
-
-    @Override
     public RiskResult<? extends Risk> add(RiskResult<? extends Risk> riskResult) {
         return this.riskResultRepository.save(riskResult);
     }

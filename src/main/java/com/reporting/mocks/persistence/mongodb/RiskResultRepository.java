@@ -11,5 +11,4 @@ import java.util.List;
 
 public interface RiskResultRepository extends MongoRepository<RiskResult<? extends Risk>,RiskRunId> {
     List<RiskResult<? extends Risk>> getAllByRiskRunId(RiskRunId riskRunId);
-    List<RiskResult<? extends Risk>> getAllByTradePopulationId(TradePopulationId tradePopulationId);
 }
