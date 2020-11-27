@@ -14,22 +14,40 @@ import java.util.concurrent.ConcurrentHashMap;
 @Scope
 public class MongoTradeStoreFactory implements IPersistenceStoreFactory<ITradeStore> {
     @Autowired
-    protected TradePopulationRepository tradePopulationRepository;
+    protected TradePopulationMetaDataRepository tradePopulationRepository;
+    @Autowired
+    protected TradePopulationEntryRepository tradePopulationEntryRepository;
+    @Autowired
+    protected TradePopulationEntryReactiveRepository tradePopulationEntryReactiveRepository;
+    @Autowired
+    protected TradePopulationMetaDataReactiveRepository tradePopulationMetaDataReactiveRepository;
     @Autowired
     protected TradeRepository tradeRepository;
 
     protected ConcurrentHashMap<String, ITradeStore> tradeStores;
 
     @Autowired
-    protected MongoTradeStoreFactory(TradePopulationRepository tradePopulationRepository, TradeRepository tradeRepository) {
+    protected MongoTradeStoreFactory(TradePopulationMetaDataRepository tradePopulationRepository,
+                                     TradePopulationEntryRepository tradePopulationEntryRepository,
+                                     TradePopulationEntryReactiveRepository tradePopulationEntryReactiveRepository,
+                                     TradePopulationMetaDataReactiveRepository tradePopulationMetaDataReactiveRepository,
+                                     TradeRepository tradeRepository) {
         this.tradeStores = new ConcurrentHashMap<>();
         this.tradePopulationRepository = tradePopulationRepository;
+        this.tradePopulationEntryRepository = tradePopulationEntryRepository;
+        this.tradePopulationEntryReactiveRepository = tradePopulationEntryReactiveRepository;
+        this.tradePopulationMetaDataReactiveRepository = tradePopulationMetaDataReactiveRepository;
         this.tradeRepository = tradeRepository;
     }
 
     @Override
     public ITradeStore create(PricingGroup pricingGroupName) {
-        ITradeStore store = new MongoTradeStore(pricingGroupName, this.tradePopulationRepository, this.tradeRepository);
+        ITradeStore store = new TradeStore(pricingGroupName,
+                this.tradePopulationRepository,
+                this.tradePopulationEntryRepository,
+                this.tradePopulationEntryReactiveRepository,
+                this.tradePopulationMetaDataReactiveRepository,
+                this.tradeRepository);
         this.tradeStores.put(store.getPricingGroup().getName(), store);
         return store;
     }
