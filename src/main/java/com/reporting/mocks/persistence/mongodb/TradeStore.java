@@ -56,7 +56,7 @@ public class TradeStore implements ITradeStore {
         this.tradePopulationMetaDataRepository.save(tradePopulation.getTradePopulationMetaData());
         for(TradeType tradeType : tradePopulation.getTradeTypes()) {
             for(Tcn tradeTcn : tradePopulation.getTcnsByTradeType(tradeType)) {
-                this.tradePopulationEntryRepository.save(new TradePopulationEntry(tradePopulation.getId(), tradeTcn, tradeType));
+                this.tradePopulationEntryRepository.save(new TradePopulationEntry(tradePopulation.getId(), this.tradeRepository.getTradeByTcn(tradeTcn)));
             }
         }
     }
@@ -121,7 +121,7 @@ public class TradeStore implements ITradeStore {
 
         for(TradeType tradeType : tpm.getTradeTypes()) {
             for(Tcn tradeTcn : tpm.getTcnsByTradeType(tradeType)) {
-                this.tradePopulationEntryRepository.save(new TradePopulationEntry(tradePopulationReactive.getId(), tradeTcn, tradeType));
+                this.tradePopulationEntryRepository.save(new TradePopulationEntry(tradePopulationReactive.getId(), this.tradeRepository.getTradeByTcn(tradeTcn)));
             }
         }
         return tradePopulationReactive;

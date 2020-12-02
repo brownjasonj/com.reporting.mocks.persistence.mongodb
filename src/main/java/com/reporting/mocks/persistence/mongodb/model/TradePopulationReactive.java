@@ -2,17 +2,14 @@ package com.reporting.mocks.persistence.mongodb.model;
 
 import com.reporting.mocks.interfaces.persistence.ITradePopulationReactive;
 import com.reporting.mocks.model.DataMarkerType;
-import com.reporting.mocks.model.PricingGroup;
 import com.reporting.mocks.model.id.TradePopulationId;
 import com.reporting.mocks.model.trade.Tcn;
 import com.reporting.mocks.model.trade.Trade;
 import com.reporting.mocks.model.trade.TradeType;
 import com.reporting.mocks.persistence.mongodb.TradePopulationEntryReactiveRepository;
 import com.reporting.mocks.persistence.mongodb.TradeRepository;
-import org.springframework.data.domain.Example;
 import reactor.core.publisher.Flux;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -85,14 +82,14 @@ public class TradePopulationReactive implements ITradePopulationReactive {
     @Override
     public Flux<Trade> getTrades() {
         return this.tradePopulationEntryReactiveRepository.findByTradePopulationId(this.getId())
-                        .map(tpe -> this.tradeRepository.getTradeByTcn(tpe.getTradeTcn()));
+                        .map(tpe -> tpe.getTrade());
     }
 
     @Override
     public Flux<Trade> getTradesByType(TradeType tradeType) {
         if (this.tradePopulationMetaData.getTradeCountForTradeType(tradeType) > 0) {
             return this.tradePopulationEntryReactiveRepository.findByTradePopulationIdAndTradeType(this.getId(), tradeType)
-                    .map(tpe -> this.tradeRepository.getTradeByTcn(tpe.getTradeTcn()));
+                    .map(tpe -> tpe.getTrade());
         }
         else
             return null;
