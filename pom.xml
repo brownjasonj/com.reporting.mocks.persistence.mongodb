@@ -5,7 +5,7 @@
 
 	<groupId>com.reporting.mocks.persistence</groupId>
 	<artifactId>mongodb</artifactId>
-	<version>0.19.0</version>
+	<version>0.19.1</version>
 	<packaging>jar</packaging>
 
 	<name>com.reporting.mocks.persistence.mongodb</name>
