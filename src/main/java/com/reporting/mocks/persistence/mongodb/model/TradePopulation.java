@@ -155,10 +155,15 @@ public class TradePopulation implements ITradePopulation, ITradePopulationLive {
 
     @Override
     public synchronized Trade oneAtRandom() {
-        Optional<Tcn> optionalTrade = this.listOfTcns.stream()
-                .skip((int) (this.listOfTcns.size() * Math.random()))
-                .findFirst();
-        return this.getTrade(optionalTrade.get());
+        if (this.listOfTcns.isEmpty()) {
+            return null;
+        }
+        else {
+            Optional<Tcn> optionalTrade = this.listOfTcns.stream()
+                    .skip((int) (this.listOfTcns.size() * Math.random()))
+                    .findFirst();
+            return this.getTrade(optionalTrade.get());
+        }
     }
 
     @Override
