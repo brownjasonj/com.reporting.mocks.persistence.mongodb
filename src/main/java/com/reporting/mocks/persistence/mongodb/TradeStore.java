@@ -69,7 +69,7 @@ public class TradeStore implements ITradeStore {
     }
 
     @Override
-    public ITradePopulationLive getLiveTradePopulation() {
+    public ITradePopulationLive getTradePopulationLive() {
         return liveTradePopulation;
     }
 
